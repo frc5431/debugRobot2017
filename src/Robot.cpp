@@ -45,9 +45,37 @@ public:
 	}
 
 	void TestPeriodic() {
+		leftDriveOn();
+		if (waited(0.5)){
+			driveOff();//i hate josef
+
+		}
+
+		rightDriveOn();
+		if (waited(0.5)){
+			driveOff();
+		}
+
+		climberOn();
+		if (waited(1.0)){
+			climberOff();
+		}
 	}
 
 private:
+	bool waited(double seconds){
+		if(startTime == 0){
+			std::time(&startTime);
+		}
+		std::time_t currentTime;
+		std::time(&currentTime);
+		if (std::difftime(currentTime, startTime) >= seconds) {
+			startTime = 0;
+			return true;
+		}
+		return false;
+	}
+
 	void drive(double left, double right){
 		robotDrive->TankDrive(left,right,false);
 	}
@@ -65,19 +93,51 @@ private:
 	}
 
 	void climberOn(){
-		climber->Set(-1.0);
+		climber->Set(-0.8);
+	}
+
+	void climberOff(){
+		climber->Set(0.0);
 	}
 
 	void groundIntakeOn(){
-		groundIntake->Set(1.0);
+		groundIntake->Set(0.5);
+	}
+
+	void groundIntakeOff(){
+		groundIntake->Set(0.0);
 	}
 
 	void saladSpinnerOn(){
 		saladSpinner->Set(0.5);
 	}
 
+	void saladSpinnerOff(){
+		saladSpinner->Set(0.0);
+	}
+
 	void shooterOn(){
 		shooterMaster->Set(0.5);
+	}
+
+	void shooterOff(){
+		shooterMaster->Set(0.0);
+	}
+
+	void angleOn(){
+
+	}
+
+	void angleOff(){
+
+	}
+
+	void shooterIntakeOn(){
+		shooterIntake->Set(0.5);
+	}
+
+	void shooterIntakeOff(){
+		shooterIntake->Set(0.0);
 	}
 
 
