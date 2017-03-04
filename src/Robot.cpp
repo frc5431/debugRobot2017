@@ -13,8 +13,6 @@ CANTalon * shooterSlave = new CANTalon(9);
 CANTalon * angle = new CANTalon(12);
 CANTalon * shooterIntake = new CANTalon(1);
 
-//frc::RobotDrive* frontRobotDrive = new frc::RobotDrive(fl,fr);
-frc::RobotDrive* rearRobotDrive = new frc::RobotDrive(rl,rr);
 Joystick* xBox = new Joystick(0);
 std::time_t startTime; //Used to calculate delay through time
 
@@ -48,14 +46,11 @@ public:
 	}
 
 	void TeleopInit() {
-	//	frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
+
 	}
 
 	void TeleopPeriodic() {
 
-		groundIntakeOn();
-/*
 		if (xBox->GetRawButton(1)){
 			isPressed = true;
 		}
@@ -65,7 +60,6 @@ public:
 			frontLeftOn();
 			if (!xBox->GetRawButton(1) && isPressed){
 				isPressed = false;
-				driveOff();//i hate josef
 				state = 20;
 			}
 			break;
@@ -74,7 +68,6 @@ public:
 			frontRightOn();
 			if (!xBox->GetRawButton(1) && isPressed){
 				isPressed = false;
-				driveOff();
 				state = 21;
 			}
 			break;
@@ -83,7 +76,6 @@ public:
 			rearLeftOn();
 			if (!xBox->GetRawButton(1) && isPressed){
 				isPressed = false;
-				driveOff();
 				state = 22;
 			}
 			break;
@@ -92,7 +84,6 @@ public:
 			rearLeftOn();
 			if (!xBox->GetRawButton(1) && isPressed){
 				isPressed = false;
-				driveOff();
 				state = 30;
 			}
 			break;
@@ -140,7 +131,7 @@ public:
 				shooterIntakeOff();
 			}
 	}
-*/
+
 		SmartDashboard::PutNumber("current state", state);
 }
 
@@ -162,112 +153,68 @@ private:
 		return false;
 	}
 
-/*	void drive(double left, double right){
-		robotDrive->TankDrive(left,right,false);
-	}
-
-	void leftDriveOn(){
-		drive(0.3, 0.0);
-	}
-
-	void rightDriveOn(){
-		drive(0.0, 0.3);
-	}
-*/
-
-	void driveOff(){
-		//frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
-	}
-
 	void frontLeftOn(){
-		//frontRobotDrive->TankDrive(0.6, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
+		fl->Set(0.5);
 	}
 
 	void frontRightOn(){
-		//frontRobotDrive->TankDrive(0.0, 0.3);
-		rearRobotDrive->TankDrive(0.0, 0.0);
+		fr->Set(0.5);
 	}
 
 	void rearLeftOn(){
-		rearRobotDrive->TankDrive(0.3, 0.0);
-		//frontRobotDrive->TankDrive(0.0, 0.0);
+		rl->Set(0.5);
 	}
 
 	void rearRightOn(){
-		rearRobotDrive->TankDrive(0.0, 0.3);
-		//frontRobotDrive->TankDrive(0.0, 0.0);
+		rr->Set(0.5);
 	}
 
 	void climberOn(){
 		climber->Set(-0.3);
-		//frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
 	}
 
 	void climberOff(){
 		climber->Set(0.0);
-		//frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
 	}
 
 	void groundIntakeOn(){
 		groundIntake->Set(0.5);
-	//	frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
 	}
 
 	void groundIntakeOff(){
 		groundIntake->Set(0.0);
-	//	frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
 	}
 
 	void saladSpinnerOn(){
 		saladSpinner->Set(0.3);
-		//frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
 	}
 
 	void saladSpinnerOff(){
 		saladSpinner->Set(0.0);
-	//	frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
 	}
 
 	void shooterOn(){
 		shooterMaster->Set(0.3);
-		//frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
 	}
 
 	void shooterOff(){
 		shooterMaster->Set(0.0);
-	//	frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
 	}
 
 	void angleOn(){
-	//	frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
+
 	}
 
 	void angleOff(){
-	//	frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
+
 	}
 
 	void shooterIntakeOn(){
 		shooterIntake->Set(0.3);
-		//frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
 	}
 
 	void shooterIntakeOff(){
 		shooterIntake->Set(0.0);
-	//	frontRobotDrive->TankDrive(0.0, 0.0);
-		rearRobotDrive->TankDrive(0.0, 0.0);
 	}
 
 
